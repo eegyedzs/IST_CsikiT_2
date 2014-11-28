@@ -23,17 +23,19 @@ public class MainActivity extends ActionBarActivity {
     }
     static class MyView extends View {
         int imageHeight, imageWidth;
-        int numberOfFaces;
+        int numberOfFaces = 5;
         int foundFaces;
         float eyeDistance;
         Bitmap bitmap;
         Paint paint;
-        FaceDetector faceDetect = new FaceDetector(imageWidth, imageHeight, numberOfFaces);
+        FaceDetector faceDetect;
         FaceDetector.Face faces[];
 
 
         MyView(Context context) {
             super(context);
+
+
             paint = new Paint(Paint.ANTI_ALIAS_FLAG);
             paint.setColor(Color.BLUE);
             paint.setStyle(Paint.Style.STROKE);
@@ -44,8 +46,9 @@ public class MainActivity extends ActionBarActivity {
             bitmap = new BitmapFactory().decodeResource(getResources(), R.drawable.picture_2, bitmapOptionsInfo);
 
             imageHeight = bitmap.getHeight();
-            imageHeight = bitmap.getWidth();
+            imageWidth = bitmap.getWidth();
 
+            faceDetect = new FaceDetector(imageWidth, imageHeight, numberOfFaces);
             faces = new FaceDetector.Face[numberOfFaces];
             foundFaces = faceDetect.findFaces(bitmap, faces);
 
